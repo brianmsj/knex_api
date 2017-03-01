@@ -33,3 +33,13 @@ app.post('/recipes/', (req, res) => {
       res.status(500).json({error: 'There is an issue'});
     });
 });
+
+
+app.get('/recipes/', (req, res) => {
+  knex.select('recipes.name', 'steps.step')
+    .from('recipes')
+    .join('steps', 'steps.recipe_id', 'recipe.id')
+    .then(function(rows) {
+      console.log(rows);
+    })
+})
