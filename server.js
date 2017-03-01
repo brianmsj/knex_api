@@ -36,10 +36,17 @@ app.post('/recipes/', (req, res) => {
 
 
 app.get('/recipes/', (req, res) => {
+  var recipeArray = [];
   knex.select('recipes.name', 'steps.step')
     .from('recipes')
-    .join('steps', 'steps.recipe_id', 'recipe.id')
+    .join('steps', 'steps.recipe_id', 'recipes.id')
     .then(function(rows) {
-      console.log(rows);
+      rows.forEach(row => {
+        console.log(row);
+      })
+      // how are we running the server? Are we creating a runserver or closeserver function?
+      // most efficient way to convert SQL table into a JSON object??
+      //
+
     })
 })
